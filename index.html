@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calculadora</title>
+  <meta charset="utf-8">
+  <script type="text/javascript">
+    var valor1 = 0;
+    var operador = 0;
+    const vaciar = () => {
+      document.getElementById("pantalla").value = "";
+    }
+
+    const cuadrado = () => {
+      if(validar()){
+        document.getElementById("pantalla").value = "Error";
+      }else {
+        let num = document.getElementById("pantalla");
+        num.value = num.value * num.value;
+        rellenar_info();
+      }
+    }
+    const mod =() => {
+      if(validar()){
+        document.getElementById("pantalla").value = "Error";
+      }else {
+        let num = document.getElementById("pantalla");
+        num.value = Math.abs(num.value);
+        rellenar_info();
+      }
+    }
+    const fact = () => {
+      if(validar()){
+        document.getElementById("pantalla").value = "Error";
+      }else {
+        let num = document.getElementById("pantalla");
+        var total = 1;
+        for (i = 0; i < num.value; i++) {
+          total = total * (num.value - i);
+        }
+        num.value = total;
+        rellenar_info();
+      }
+    }
+    const rellenar_info = () => {
+      let num = document.getElementById("pantalla");
+      let info = document.getElementById("info");
+      if (num.value <100){
+          info.innerHTML = "Info: El resultado es menor que 100"
+      }else if(num.value > 100 && num.value< 200){
+          info.innerHTML = "Info: El resultado está entre 100 y 200"
+      }else{
+          info.innerHTML = "Info: El resultado es superior a 200"
+      }
+    }
+    const add = () => {
+      if(validar()){
+        document.getElementById("pantalla").value = "Error";
+      }else {
+        let num = document.getElementById("pantalla");
+        if (valor1 == 0) {
+          valor1 = num.value;
+          num.value = "";
+          operador = 1;
+        } else {
+        }
+      }
+    }
+    const mul = () => {
+      if(validar()){
+        document.getElementById("pantalla").value = "Error";
+      }else {
+        let num = document.getElementById("pantalla");
+        if (valor1 == 0) {
+          valor1 = num.value;
+          num.value = "";
+          operador = 2;
+        } else {
+        }
+      }
+    }
+    const eq = () => {
+      if(validar()){
+        document.getElementById("pantalla").value = "Error";
+      }else {
+        let num = document.getElementById("pantalla");
+        if (operador == 1) {
+
+          num.value = parseInt(num.value) + parseInt(valor1);
+          valor1 = 0;
+
+          operador = 0;
+        } else {
+          num.value = num.value * parseInt(valor1);
+          valor1 = 0;
+
+          operador = 0;
+        }
+        rellenar_info();
+      }
+    }
+
+    const sumatorio = () => {
+      if(validar()){
+        document.getElementById("pantalla").value = "Error";
+      }else {
+        let csv = document.getElementById("pantalla");
+        let data = document.getElementById("pantalla").value.split(',');
+
+        const res = data.reduce((total, currentValue) => {
+          return parseInt(total) + parseInt(currentValue);
+        });
+        console.log(csv.value = res);
+        rellenar_info();
+      }
+    }
+
+    const ordenar = () => {
+      if(validar()){
+          document.getElementById("pantalla").value = "Error";
+      }else{
+      let csv = document.getElementById("pantalla");
+      let numbers = document.getElementById("pantalla").value.split(',');
+      numbers.sort(function(a, b) {
+        return a - b;
+      });
+      csv.value = numbers;}
+    }
+
+    const revertir = () => {
+      if(validar()){
+        document.getElementById("pantalla").value = "Error";
+      }else {
+        let csv = document.getElementById("pantalla");
+        let data = document.getElementById("pantalla").value.split(',');
+        csv.value = data.reverse();
+      }
+    }
+
+    const quitar = () => {
+      if(validar()){
+        document.getElementById("pantalla").value = "Error";
+      }else {
+        let csv = document.getElementById("pantalla");
+        let data = document.getElementById("pantalla").value.split(',');
+        data.pop();
+        csv.value = data;
+      }
+    }
+    const validar = () => {
+
+      let data = document.getElementById("pantalla").value;
+      console.log(parseInt(data));
+      if (isNaN(parseInt(data))){
+        return true;
+      }else{
+        return false;
+      }
+    }
+  </script>
+</head>
+<body>
+  Número:
+  <input type="text" id="pantalla" onclick="vaciar()">
+  <h2 id="info" class="grande" title="Info sobre el número">Info sobre el número</h2>
+  <h3>Operaciones Unitarias</h3>
+  <button id="cuadrado" onclick="cuadrado()">x<sup>2</sup></button>
+  <button id="modulo" onclick="mod()">mod</button>
+  <button id="factorial" onclick="fact()">x!</button>
+  <h3>Operaciones binarias</h3>
+  <button id="suma" onclick="add()">+</button>
+  <button id="multiplicacion" onclick="mul()">*</button>
+  <button id="igual" onclick="eq()">=</button>
+  <h3>Operaciones en formato CSV</h3>
+  <button id="sumatorio" onclick="sumatorio()">Σx</button>
+  <button id="ordenar" onclick="ordenar()">ordenar</button>
+  <button id="revertir" onclick="revertir()">revertir</button>
+  <button id="quitar" onclick="quitar()">quitar</button>
+
+ </body>
+</html>
